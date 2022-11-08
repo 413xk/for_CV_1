@@ -1,9 +1,15 @@
+import time
+
 import pytest
 
+from .pages.basket_page import BasketPage
+from .pages.main_page import MainPage
 from .pages.product_page import ProductPage
 
+
 # make parametrize, dynamic link and xfail for dropped test
-'''@pytest.mark.parametrize('promo_offer', [pytest.param(i, marks=pytest.mark.xfail(i == '?', reason='')) for i in range(10)])
+@pytest.mark.parametrize('promo_offer',
+                         [pytest.param(i, marks=pytest.mark.xfail(i == '?', reason='')) for i in range(10)])
 def test_guest_can_add_product_to_basket(browser, promo_offer):
     url = f"http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207/?promo=offer{promo_offer}"
     browser.delete_all_cookies()  # clear cookies before start
@@ -13,7 +19,28 @@ def test_guest_can_add_product_to_basket(browser, promo_offer):
     product_page.click_button_add_to_basket()
     product_page.should_be_correct_answer()
     product_page.should_be_correct_page_data()
-'''
+
+
+@pytest.mark.new
+def test_guest_cant_see_product_in_basket_opened_from_main_page(browser):
+    url = 'http://selenium1py.pythonanywhere.com/'
+    main_page = MainPage(browser, url)
+    main_page.open()
+    main_page.go_to_basket()
+    basket_page = BasketPage(browser, url)
+    basket_page.should_be_no_items_in_basket()
+    basket_page.should_be_empty_basket()
+
+
+@pytest.mark.new
+def test_guest_cant_see_product_in_basket_opened_from_product_page(browser):
+    url = 'http://selenium1py.pythonanywhere.com/en-gb/catalogue/coders-at-work_207/'
+    product_page = ProductPage(browser, url)
+    product_page.open()
+    product_page.go_to_basket()
+    basket_page = BasketPage(browser, url)
+    basket_page.should_be_no_items_in_basket()
+    basket_page.should_be_empty_basket()
 
 
 @pytest.mark.xfail(reason='fix it later')
@@ -31,6 +58,7 @@ def test_guest_cant_see_success_message(browser):
     product_page.open()
     product_page.should_not_be_success_message()
 
+
 def test_guest_can_go_to_login_page_from_product_page(browser):
     link = 'http://selenium1py.pythonanywhere.com/en-gb/catalogue/the-city-and-the-stars_95/'
     page = ProductPage(browser, link)
@@ -39,6 +67,7 @@ def test_guest_can_go_to_login_page_from_product_page(browser):
     page.should_be_login_link()
     page.go_to_login_page()
     page.should_be_login_page()
+
 
 def test_guest_should_see_login_link_on_product_page(browser):
     link = 'http://selenium1py.pythonanywhere.com/en-gb/catalogue/the-city-and-the-stars_95/'

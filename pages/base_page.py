@@ -1,3 +1,5 @@
+import time
+
 from selenium.webdriver.support import expected_conditions as EC
 
 from selenium.common.exceptions import NoSuchElementException, TimeoutException
@@ -15,6 +17,10 @@ class BasePage:
 
     def click_button_add_to_basket(self):
         url = self.browser.find_element(*ItemPageLocators.ADD_TO_BASKET_BUTTON)
+        url.click()
+
+    def go_to_basket(self):
+        url = self.browser.find_element(*BasePageLocators.VIEW_BASKET)
         url.click()
 
     def go_to_login_page(self):

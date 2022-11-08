@@ -23,7 +23,7 @@ def browser(request):
     user_language = request.config.getoption('language')
     options = Options()
     # no window mode
-    options.add_argument('headless')
+    #options.add_argument('headless')
     options.add_experimental_option('prefs', {'intl.accept_languages': user_language})
     if browser_name in supported_browsers:
         print(f'\nstart {browser_name} browser for test')
