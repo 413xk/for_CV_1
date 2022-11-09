@@ -27,3 +27,4 @@ class LoginPageLocators:
     REGISTER_PASSWORD = By.CSS_SELECTOR, '#id_registration-password1'
     REGISTER_PASSWORD_CONFIRM = By.CSS_SELECTOR, '#id_registration-password2'
     REGISTER_BUTTON = By.CSS_SELECTOR, '#register_form .btn'
+

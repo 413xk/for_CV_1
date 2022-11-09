@@ -54,7 +54,6 @@ class ProductPage(BasePage):
         except NoAlertPresentException:
             print("No second alert presented")
 
-    #  1.11 add checking for success messages
     def should_not_be_success_message(self):
         assert self.is_not_element_present(*ItemPageLocators.SUCCESS_MESSAGE), \
             "Success message is presented, but should not be"

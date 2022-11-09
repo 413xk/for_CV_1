@@ -1,10 +1,9 @@
 import string
-import string
-import time
+
 from random import choice, randint
 
 from .base_page import BasePage
-from .locators import LoginPageLocators, BasePageLocators
+from .locators import LoginPageLocators
 
 
 def login_and_password_generator():
